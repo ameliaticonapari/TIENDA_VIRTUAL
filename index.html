@@ -9,7 +9,7 @@
 
     <style>
         :root {
-            /* PALETA OFICIAL AMELI'S */
+            /* PALETA "AMELI'S BLUE TEMU" */
             --primary-blue: #004aad; 
             --dark-blue: #003366;
             --price-red: #da291c;    
@@ -20,11 +20,11 @@
             --green-success: #059669;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; -webkit-tap-highlight-color: transparent; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
         
-        body { background-color: var(--bg-page); color: #333; padding-bottom: 20px; }
+        body { background-color: var(--bg-page); color: #333; padding-bottom: 60px; }
 
-        /* === HEADER === */
+        /* HEADER */
         header {
             background: var(--white);
             padding: 15px 20px;
@@ -45,7 +45,7 @@
         }
         .search-btn { position: absolute; right: 5px; top: 50%; transform: translateY(-50%); background: var(--primary-blue); color: white; border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 
-        /* === BANNER === */
+        /* BANNER OFERTAS */
         .flash-banner {
             background: linear-gradient(90deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
             color: white; padding: 10px 20px;
@@ -54,7 +54,7 @@
         }
         .timer-box span { background: white; color: var(--primary-blue); padding: 2px 5px; border-radius: 4px; font-weight: 800; margin: 0 2px; }
 
-        /* === LAYOUT (GRILLA + SIDEBAR) === */
+        /* LAYOUT */
         .main-layout {
             display: grid; grid-template-columns: 1fr 320px; gap: 20px;
             max-width: 1400px; margin: 20px auto; padding: 0 15px;
@@ -72,11 +72,12 @@
             background: #e6f0ff; color: var(--primary-blue); border-color: var(--primary-blue); font-weight: 700;
         }
 
-        /* GRILLA PRODUCTOS */
+        /* GRILLA */
         .products-grid {
             display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px;
         }
 
+        /* TARJETA */
         .product-card {
             background: white; border-radius: 8px; overflow: hidden; border: 1px solid transparent; transition: 0.3s; cursor: pointer; position: relative;
         }
@@ -109,9 +110,26 @@
             width: 100%; margin-top: 8px; background: white; border: 1px solid var(--primary-blue); color: var(--primary-blue);
             padding: 6px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: 0.2s;
         }
-        .btn-add-cart:active { background: var(--primary-blue); color: white; }
+        .btn-add-cart:hover { background: var(--primary-blue); color: white; }
 
-        /* === ESTILOS DEL CARRITO (SIDEBAR PC) === */
+        /* --- ESTILOS DEL CARRITO MEJORADOS --- */
+        .cart-item-row { 
+            display: flex; justify-content: space-between; align-items: center; 
+            margin-bottom: 12px; border-bottom: 1px dashed #eee; padding-bottom: 12px; 
+        }
+        .cart-info { flex-grow: 1; padding-right: 10px; }
+        .cart-name { font-size: 0.9rem; font-weight: 500; color: #333; display: block; }
+        .cart-price { font-size: 0.85rem; color: #666; }
+        
+        .cart-controls { display: flex; align-items: center; gap: 8px; }
+        .qty-btn { 
+            background: #f0f0f0; border: none; width: 24px; height: 24px; border-radius: 50%; 
+            font-weight: bold; cursor: pointer; color: #555; display:flex; align-items:center; justify-content:center;
+        }
+        .qty-val { font-weight: 700; font-size: 0.9rem; min-width: 15px; text-align: center; }
+        .btn-trash { color: var(--price-red); cursor: pointer; font-size: 1rem; padding: 5px; margin-left: 5px; }
+
+        /* SIDEBAR / CART (Escritorio) */
         .cart-sidebar {
             background: white; border-radius: 8px; padding: 15px; height: fit-content; border: 1px solid #ddd;
             position: sticky; top: 80px;
@@ -119,88 +137,47 @@
         .cart-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
         .cart-items { max-height: 300px; overflow-y: auto; font-size: 0.9rem; }
         
-        /* Items dentro del carrito */
-        .cart-item-row { 
-            display: flex; justify-content: space-between; align-items: center; 
-            margin-bottom: 12px; border-bottom: 1px dashed #eee; padding-bottom: 12px; 
-        }
-        .cart-info { flex-grow: 1; padding-right: 10px; }
-        .cart-name { font-size: 0.9rem; font-weight: 500; color: #333; display: block; margin-bottom: 3px; }
-        .cart-price { font-size: 0.85rem; color: #666; }
-        
-        .cart-controls { display: flex; align-items: center; gap: 8px; background: #f9f9f9; padding: 4px; border-radius: 15px; }
-        .qty-btn { 
-            background: white; border: 1px solid #eee; width: 24px; height: 24px; border-radius: 50%; 
-            font-weight: bold; cursor: pointer; color: var(--primary-blue); display:flex; align-items:center; justify-content:center;
-        }
-        .qty-val { font-weight: 700; font-size: 0.9rem; min-width: 15px; text-align: center; }
-        .btn-trash { color: #ff4d4d; cursor: pointer; font-size: 1rem; padding: 5px; margin-left: 5px; }
-
-        /* Resumen Ocultable */
-        .summary-toggle-btn {
-            background: none; border: none; color: #666; font-size: 0.8rem; cursor: pointer;
-            width: 100%; text-align: center; margin: 10px 0 5px 0; display: flex; align-items: center; justify-content: center; gap: 5px;
-        }
-        .summary-details { overflow: hidden; transition: max-height 0.3s ease; }
         .summary-row { display: flex; justify-content: space-between; font-size: 0.9rem; margin-top: 5px; color: #555; }
-        
-        .summary-total { display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 900; margin-top: 10px; border-top: 2px solid #eee; padding-top: 15px; color: var(--dark-blue); }
+        .summary-total { display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 900; margin-top: 15px; border-top: 2px solid #eee; padding-top: 10px; color: var(--dark-blue); }
         .discount-text { color: var(--green-success); font-weight: bold; }
 
         .btn-checkout {
             display: block; width: 100%; background: var(--primary-blue); color: white; text-align: center;
-            padding: 14px; border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: 15px;
-            box-shadow: 0 4px 10px rgba(0, 74, 173, 0.3); font-size: 1rem;
+            padding: 12px; border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: 15px;
+            box-shadow: 0 4px 10px rgba(0, 74, 173, 0.3);
         }
+        .btn-checkout:hover { background: var(--dark-blue); }
+
         .btn-keep-shopping {
             width: 100%; background: transparent; color: #777; border: none; padding: 10px;
-            font-size: 0.85rem; cursor: pointer; text-decoration: underline; margin-top: 5px;
+            font-size: 0.9rem; cursor: pointer; text-decoration: underline; margin-top: 5px;
         }
 
-        /* Mensaje de Descuento */
+        /* AVISO DE DESCUENTO (Barra de progreso) */
         .discount-alert {
             background: #fff7ed; border: 1px solid #ffedd5; color: #9a3412; padding: 10px; 
             border-radius: 8px; font-size: 0.8rem; text-align: center; margin-bottom: 15px;
         }
         .discount-alert.success { background: #ecfdf5; border-color: #d1fae5; color: #065f46; }
 
-        /* === MÓVIL: BOTÓN FLOTANTE Y MODAL ESTÉTICO === */
+        /* BOTÓN FLOTANTE (Móvil) */
         .mobile-fab { display: none; }
-        .modal { display: none; }
 
+        /* RESPONSIVE */
         @media (max-width: 900px) {
             .main-layout { grid-template-columns: 1fr; }
-            .cart-sidebar { display: none; } /* Ocultamos sidebar en móvil */
-            
-            /* Botón Flotante */
+            .cart-sidebar { display: none; }
             .mobile-fab {
                 display: flex; position: fixed; bottom: 20px; right: 20px; background: var(--primary-blue); color: white;
                 width: 60px; height: 60px; border-radius: 50%; align-items: center; justify-content: center;
-                font-size: 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.4); z-index: 2000; transition: transform 0.2s;
+                font-size: 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 2000;
             }
             .mobile-badge { position: absolute; top: -5px; right: -5px; background: var(--price-red); color: white; width: 22px; height: 22px; border-radius: 50%; font-size: 0.7rem; display: flex; align-items: center; justify-content: center; font-weight: bold; border: 2px solid white; }
-
-            /* Modal Bottom Sheet */
-            .modal { 
-                display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-                background: rgba(0,0,0,0.6); z-index: 3000; align-items: flex-end; /* Alineado abajo */
-                backdrop-filter: blur(2px);
-            }
-            .modal-content { 
-                background: white; width: 100%; 
-                border-radius: 20px 20px 0 0; /* Solo bordes de arriba */
-                padding: 0; /* Padding controlado por secciones */
-                animation: slideUp 0.3s cubic-bezier(0.25, 1, 0.5, 1); 
-                max-height: 85vh; /* Altura máxima */
-                display: flex; flex-direction: column;
-            }
-            
-            /* Secciones del Modal */
-            .m-header { padding: 15px 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
-            .m-body { padding: 15px 20px; overflow-y: auto; flex: 1; }
-            .m-footer { padding: 15px 20px 25px 20px; border-top: 1px solid #eee; background: white; box-shadow: 0 -5px 15px rgba(0,0,0,0.05); }
         }
 
+        /* MODAL (Para móvil) */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 3000; align-items: flex-end; }
+        .modal-content { background: white; width: 100%; border-radius: 20px 20px 0 0; padding: 25px; animation: slideUp 0.3s; max-height: 85vh; overflow-y: auto;}
         @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
 
     </style>
@@ -220,7 +197,7 @@
 
     <div class="flash-banner">
         <div><i class="fas fa-bolt" style="color:#ffc107"></i> Ofertas Relámpago</div>
-        <div class="timer-box" id="countdown">Termina en: <span>00</span>:<span>00</span>:<span>00</span></div>
+        <div class="timer-box" id="countdown">Termina en: <span>02</span>:<span>45</span>:<span>18</span></div>
     </div>
 
     <div class="main-layout">
@@ -244,6 +221,7 @@
             <div class="cart-title">Resumen de Pedido</div>
             
             <div id="desktop-discount-bar" class="discount-alert" style="display:none;"></div>
+
             <div id="desktop-cart-items" class="cart-items">
                 <p style="color:#999; text-align:center; padding:20px;">Tu carrito está vacío</p>
             </div>
@@ -263,23 +241,19 @@
 
     <div class="modal" id="cart-modal" onclick="if(event.target === this) closeModal()">
         <div class="modal-content">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                <h3 style="color:var(--dark-blue)">Tu Carrito</h3>
+                <button onclick="closeModal()" style="border:none; background:none; font-size:1.5rem;">&times;</button>
+            </div>
+
+            <div id="mobile-discount-bar" class="discount-alert" style="display:none;"></div>
+
+            <div id="mobile-cart-items" style="max-height:300px; overflow-y:auto; margin-bottom:15px;"></div>
             
-            <div class="m-header">
-                <h3 style="color:var(--dark-blue); font-size:1.2rem; margin:0">Tu Carrito</h3>
-                <button onclick="closeModal()" style="border:none; background:none; font-size:1.5rem; color:#999">&times;</button>
-            </div>
+            <div id="mobile-cart-summary"></div>
 
-            <div class="m-body">
-                <div id="mobile-discount-bar" class="discount-alert" style="display:none;"></div>
-                <div id="mobile-cart-items"></div>
-            </div>
-
-            <div class="m-footer">
-                <div id="mobile-cart-summary"></div> <a href="#" class="btn-checkout" onclick="checkout()">
-                    Pedir por WhatsApp <i class="fab fa-whatsapp"></i>
-                </a>
-            </div>
-
+            <a href="#" class="btn-checkout" onclick="checkout()">Pedir por WhatsApp</a>
+            <button class="btn-keep-shopping" onclick="closeModal()">Seguir comprando</button>
         </div>
     </div>
 
@@ -291,18 +265,25 @@
         let PROMO_META = 99999;
         let PROMO_BONO = 0;
         let allProducts = [], cart = [];
-        let isSummaryExpanded = true; // Estado del acordeón
 
+        // Timer
         setInterval(() => {
             const now = new Date();
-            const h = 23 - now.getHours(), m = 59 - now.getMinutes(), s = 59 - now.getSeconds();
-            document.getElementById('countdown').innerHTML = `<span>${h<10?'0'+h:h}</span>:<span>${m<10?'0'+m:m}</span>:<span>${s<10?'0'+s:s}</span>`;
+            const h = 23 - now.getHours();
+            const m = 59 - now.getMinutes();
+            const s = 59 - now.getSeconds();
+            document.getElementById('countdown').innerHTML = `Termina en: <span>${h<10?'0'+h:h}</span>:<span>${m<10?'0'+m:m}</span>:<span>${s<10?'0'+s:s}</span>`;
         }, 1000);
 
         async function loadStoreData() {
             try {
-                const [resTienda, resConfig] = await Promise.all([ fetch(API_TIENDA), fetch(API_CONFIG) ]);
+                const [resTienda, resConfig] = await Promise.all([
+                    fetch(API_TIENDA),
+                    fetch(API_CONFIG)
+                ]);
+
                 const dataTienda = await resTienda.json();
+                
                 try {
                     const dataConfig = await resConfig.json();
                     if(dataConfig && dataConfig.length > 0) {
@@ -310,8 +291,11 @@
                             if(fila.dato === 'meta') PROMO_META = parseFloat(fila.valor);
                             if(fila.dato === 'bono') PROMO_BONO = parseFloat(fila.valor);
                         });
+                        console.log(`Configuración cargada: Meta S/${PROMO_META}, Bono S/${PROMO_BONO}`);
                     }
-                } catch(e){}
+                } catch(errConfig) {
+                    console.warn("No se pudo cargar la pestaña 'config', usando valores por defecto.");
+                }
 
                 if(!dataTienda || dataTienda.length === 0 || dataTienda.error) return;
 
@@ -326,7 +310,7 @@
                 }));
                 renderProducts(allProducts);
 
-            } catch (e) { console.error("Error:", e); }
+            } catch (e) { console.error("Error cargando la tienda:", e); }
         }
 
         function renderProducts(products) {
@@ -346,7 +330,7 @@
                     oldPriceHtml = `<span class="original-price">S/ ${(price * 1.2).toFixed(2)}</span>`;
                 }
                 
-                let dealTag = prod.descuento > 0 ? `<div class="deal-tag">⚡ -${prod.descuento}%</div>` : '';
+                let dealTag = prod.descuento > 0 ? `<div class="deal-tag">⚡ OFERTA FLASH -${prod.descuento}%</div>` : '';
                 let btn = prod.stock > 0 
                     ? `<button class="btn-add-cart" onclick="addToCart('${prod.nombre}', ${finalPrice})">Añadir</button>`
                     : `<button class="btn-add-cart" style="background:#eee; color:#999; border:none;" disabled>Agotado</button>`;
@@ -374,18 +358,15 @@
         function changeQty(index, change) {
             if(cart[index].quantity + change > 0) {
                 cart[index].quantity += change;
-            } 
+            } else {
+                // Si baja a 0, preguntamos si borrar o simplemente no hacemos nada (a gusto del cliente).
+                // Aquí opto por no bajar de 1, para borrar usar el tacho.
+            }
             updateCartUI();
         }
 
         function removeFromCart(index) {
             cart.splice(index, 1);
-            updateCartUI();
-            if(cart.length === 0) closeModal();
-        }
-
-        function toggleSummary() {
-            isSummaryExpanded = !isSummaryExpanded;
             updateCartUI();
         }
 
@@ -400,62 +381,51 @@
                     <div class="cart-item-row">
                         <div class="cart-info">
                             <span class="cart-name">${item.name}</span>
-                            <span class="cart-price">S/ ${item.price.toFixed(2)}</span>
+                            <span class="cart-price">S/ ${item.price.toFixed(2)} c/u</span>
                         </div>
                         <div class="cart-controls">
                             <button class="qty-btn" onclick="changeQty(${index}, -1)">-</button>
                             <span class="qty-val">${item.quantity}</span>
                             <button class="qty-btn" onclick="changeQty(${index}, 1)">+</button>
+                            <i class="fas fa-trash-alt btn-trash" onclick="removeFromCart(${index})"></i>
                         </div>
-                        <i class="fas fa-trash-alt btn-trash" onclick="removeFromCart(${index})"></i>
                     </div>
                 `;
             });
 
-            // Descuento
+            // Lógica de Descuento
             let discount = 0;
             let barMessage = '';
-            let barDisplay = 'block';
             let barClass = 'discount-alert';
+            let barDisplay = 'block';
 
             if (cart.length === 0) {
                 barDisplay = 'none';
             } else if (subtotal >= PROMO_META) {
                 discount = PROMO_BONO;
-                barMessage = `🎉 <b>¡FELICIDADES!</b> Tienes S/ ${PROMO_BONO.toFixed(2)} de descuento.`;
+                barMessage = `🎉 ¡Genial! Tienes <b>S/ ${PROMO_BONO.toFixed(2)} DE DESCUENTO</b> aplicado.`;
                 barClass = 'discount-alert success';
             } else {
                 let missing = PROMO_META - subtotal;
-                barMessage = `🎁 Agrega <b>S/ ${missing.toFixed(2)}</b> más para ganar <b>S/ ${PROMO_BONO.toFixed(2)} OFF</b>.`;
+                barMessage = `🎁 Agrega <b>S/ ${missing.toFixed(2)}</b> más para ganar <b>S/ ${PROMO_BONO.toFixed(2)} DE DESCUENTO</b>.`;
             }
 
             let total = subtotal - discount;
 
-            // HTML RESUMEN (Acordeón)
-            let chevron = isSummaryExpanded ? 'fa-chevron-down' : 'fa-chevron-up';
-            let textToggle = isSummaryExpanded ? 'Ocultar detalles' : 'Ver detalles';
-            let displayDetails = isSummaryExpanded ? 'block' : 'none';
-
+            // HTML del Resumen
             let summaryHtml = `
-                <button class="summary-toggle-btn" onclick="toggleSummary()">
-                    ${textToggle} <i class="fas ${chevron}"></i>
-                </button>
-                
-                <div class="summary-details" style="display:${displayDetails}">
-                    <div class="summary-row"><span>Subtotal</span> <span>S/ ${subtotal.toFixed(2)}</span></div>
-                    ${discount > 0 ? `<div class="summary-row discount-text"><span>Descuento</span> <span>- S/ ${discount.toFixed(2)}</span></div>` : ''}
-                </div>
-
-                <div class="summary-total"><span>Total</span> <span>S/ ${total.toFixed(2)}</span></div>
+                <div class="summary-row"><span>Subtotal:</span> <span>S/ ${subtotal.toFixed(2)}</span></div>
+                ${discount > 0 ? `<div class="summary-row discount-text"><span>Descuento Especial:</span> <span>- S/ ${discount.toFixed(2)}</span></div>` : ''}
+                <div class="summary-total"><span>Total:</span> <span>S/ ${total.toFixed(2)}</span></div>
             `;
 
-            // ACTUALIZAR DESKTOP (Sidebar)
-            document.getElementById('desktop-cart-items').innerHTML = itemsHtml || '<p style="text-align:center; color:#999">Vacío</p>';
+            // Renderizar Desktop
+            document.getElementById('desktop-cart-items').innerHTML = itemsHtml || '<p style="text-align:center; color:#999">Tu carrito está vacío</p>';
             document.getElementById('desktop-cart-summary').innerHTML = summaryHtml;
             const deskBar = document.getElementById('desktop-discount-bar');
             deskBar.innerHTML = barMessage; deskBar.className = barClass; deskBar.style.display = barDisplay;
 
-            // ACTUALIZAR MÓVIL (Bottom Sheet)
+            // Renderizar Móvil
             document.getElementById('mobile-cart-items').innerHTML = itemsHtml;
             document.getElementById('mobile-cart-summary').innerHTML = summaryHtml;
             const mobBar = document.getElementById('mobile-discount-bar');
@@ -489,7 +459,7 @@
             
             msg += `%0A----------------`;
             msg += `%0ASubtotal: S/ ${subtotal.toFixed(2)}`;
-            if(discount > 0) msg += `%0A*Descuento: - S/ ${discount.toFixed(2)}* 🎉`;
+            if(discount > 0) msg += `%0A*Descuento Especial: - S/ ${discount.toFixed(2)}* 🎉`;
             msg += `%0A*TOTAL A PAGAR: S/ ${total.toFixed(2)}*`;
             
             window.open(`https://wa.me/51904850808?text=${msg}`, '_blank');
